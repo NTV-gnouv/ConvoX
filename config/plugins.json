@@ -1,0 +1,38 @@
+{
+  "plugins": {
+    "enabled": true,
+    "autoLoad": true,
+    "hotReload": true,
+    "pluginDir": "./plugins",
+    "defaultPlugins": [
+      "menu",
+      "info",
+      "ping",
+      "dice",
+      "flip",
+      "joke",
+      "weather",
+      "translate",
+      "qr",
+      "meme",
+      "avatar",
+      "admin"
+    ],
+    "pluginConfig": {
+      "menu": {
+        "enabled": true,
+        "autoShow": true,
+        "showOnStart": true
+      },
+      "info": {
+        "enabled": true,
+        "showVersion": true,
+        "showUptime": true
+      },
+      "ping": {
+        "enabled": true,
+        "showLatency": true
+      }
+    }
+  }
+}

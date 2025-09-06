@@ -1,0 +1,123 @@
+{
+  "categories": {
+    "1": {
+      "name": "🎮 Game & Entertainment",
+      "description": "Các lệnh game và giải trí",
+      "commands": [
+        {
+          "name": "dice",
+          "description": "Gieo xúc xắc",
+          "usage": "!dice",
+          "example": "!dice"
+        },
+        {
+          "name": "flip",
+          "description": "Tung đồng xu",
+          "usage": "!flip",
+          "example": "!flip"
+        },
+        {
+          "name": "joke",
+          "description": "Kể chuyện cười",
+          "usage": "!joke",
+          "example": "!joke"
+        }
+      ]
+    },
+    "2": {
+      "name": "🔧 Utility & Tools",
+      "description": "Các công cụ tiện ích",
+      "commands": [
+        {
+          "name": "weather",
+          "description": "Xem thời tiết",
+          "usage": "!weather [city]",
+          "example": "!weather Hanoi"
+        },
+        {
+          "name": "translate",
+          "description": "Dịch văn bản",
+          "usage": "!translate [text] [to_lang]",
+          "example": "!translate hello vi"
+        },
+        {
+          "name": "qr",
+          "description": "Tạo mã QR",
+          "usage": "!qr [text]",
+          "example": "!qr Hello World"
+        }
+      ]
+    },
+    "3": {
+      "name": "📊 Information & Stats",
+      "description": "Thông tin và thống kê",
+      "commands": [
+        {
+          "name": "info",
+          "description": "Thông tin bot",
+          "usage": "!info",
+          "example": "!info"
+        },
+        {
+          "name": "ping",
+          "description": "Kiểm tra ping",
+          "usage": "!ping",
+          "example": "!ping"
+        },
+        {
+          "name": "uptime",
+          "description": "Thời gian hoạt động",
+          "usage": "!uptime",
+          "example": "!uptime"
+        }
+      ]
+    },
+    "4": {
+      "name": "🎨 Media & Images",
+      "description": "Xử lý media và hình ảnh",
+      "commands": [
+        {
+          "name": "meme",
+          "description": "Tạo meme",
+          "usage": "!meme [text1] [text2]",
+          "example": "!meme Hello World"
+        },
+        {
+          "name": "avatar",
+          "description": "Tạo avatar",
+          "usage": "!avatar [name]",
+          "example": "!avatar John"
+        }
+      ]
+    },
+    "5": {
+      "name": "⚙️ Admin & Settings",
+      "description": "Quản trị và cài đặt",
+      "commands": [
+        {
+          "name": "admin",
+          "description": "Lệnh admin",
+          "usage": "!admin [command]",
+          "example": "!admin help"
+        },
+        {
+          "name": "ban",
+          "description": "Cấm người dùng",
+          "usage": "!ban [user]",
+          "example": "!ban @user"
+        },
+        {
+          "name": "unban",
+          "description": "Bỏ cấm người dùng",
+          "usage": "!unban [user]",
+          "example": "!unban @user"
+        }
+      ]
+    }
+  },
+  "menu": {
+    "title": "🎯 CONVOX BOT MENU",
+    "subtitle": "Chọn category để xem các lệnh:",
+    "footer": "Gõ số thứ tự để chọn category (VD: 1, 2, 3...)"
+  }
+}

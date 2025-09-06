@@ -1,0 +1,23 @@
+{
+  "bot": {
+    "name": "ConvoX",
+    "version": "1.0.0",
+    "prefix": "!",
+    "admin": [],
+    "autoReply": true,
+    "autoMarkRead": true,
+    "logLevel": "info"
+  },
+  "facebook": {
+    "appstate": "./appstate.json",
+    "listenEvents": true,
+    "listenTyping": true,
+    "selfListen": false
+  },
+  "features": {
+    "menu": true,
+    "plugins": true,
+    "commands": true,
+    "autoReply": true
+  }
+}
