@@ -61,8 +61,8 @@ class PluginManager {
                 return false;
             }
 
-            // Load plugin module
-            const PluginClass = require(pluginFile);
+            // Load plugin module - use absolute path for require
+            const PluginClass = require(path.resolve(pluginFile));
             const plugin = new PluginClass(this.api, pluginConfig);
             
             // Initialize plugin
@@ -139,7 +139,7 @@ class PluginManager {
             
             // Clear require cache
             const pluginPath = path.join(this.pluginDir, pluginName, 'index.js');
-            delete require.cache[require.resolve(pluginPath)];
+            delete require.cache[require.resolve(path.resolve(pluginPath))];
             
             // Load again
             await this.loadPlugin(pluginName);

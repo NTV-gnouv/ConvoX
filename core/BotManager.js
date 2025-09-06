@@ -50,7 +50,7 @@ class BotManager {
 
     async initializeFacebook() {
         try {
-            const fca = require('fca-unofficial');
+            const fca = require('@dongdev/fca-unofficial');
 
                       // Determine state file path (supports fbstate and appstate)
                       const statePath = this.config.bot.facebook.fbstate || this.config.bot.facebook.appstate || './fbstate.json';
