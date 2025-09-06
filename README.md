@@ -20,7 +20,6 @@ cd ConvoX
 ```bash
 npm install
 ```
-<<<<<<< HEAD
 
 ### 3. Cấu hình Facebook FbState
 - File `fbstate.json` đã được tạo sẵn với dữ liệu mẫu
@@ -74,7 +73,6 @@ ConvoX/
 │   ├── Logger.js
 │   └── MenuSystem.js
 ├── plugins/         # Plugin system
-<<<<<<< HEAD
 │   ├── admin/
 │   ├── help/
 │   ├── info/
