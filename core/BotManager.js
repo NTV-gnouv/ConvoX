@@ -36,8 +36,12 @@ class BotManager {
     async loadConfig() {
         try {
             const pluginsConfig = await fs.readJson('./config/plugins.json');
+            const botConfig = await fs.readJson('./config/bot.json');
+            
             this.config = {
-                bot: await fs.readJson('./config/bot.json'),
+                bot: botConfig.bot || botConfig,
+                facebook: botConfig.facebook || {},
+                features: botConfig.features || {},
                 commands: await fs.readJson('./config/commands.json'),
                 plugins: pluginsConfig.plugins || pluginsConfig
             };
@@ -53,7 +57,7 @@ class BotManager {
             const fca = require('@dongdev/fca-unofficial');
 
                       // Determine state file path (supports fbstate and appstate)
-                      const statePath = this.config.bot.facebook.fbstate || this.config.bot.facebook.appstate || './fbstate.json';
+                      const statePath = this.config.facebook.fbstate || this.config.facebook.appstate || './fbstate.json';
 
                       // Load state from file
                       const rawState = await fs.readJson(statePath);
@@ -67,11 +71,11 @@ class BotManager {
             // Initialize Facebook API with appstate
             this.api = await new Promise((resolve, reject) => {
                 fca({ appState: stateDataRaw }, {
-                    listenEvents: this.config.bot.facebook.listenEvents,
-                    listenTyping: this.config.bot.facebook.listenTyping,
-                    selfListen: this.config.bot.facebook.selfListen,
-                    forceLogin: this.config.bot.facebook.forceLogin,
-                    logLevel: this.config.bot.facebook.logLevel
+                    listenEvents: this.config.facebook.listenEvents,
+                    listenTyping: this.config.facebook.listenTyping,
+                    selfListen: this.config.facebook.selfListen,
+                    forceLogin: this.config.facebook.forceLogin,
+                    logLevel: this.config.facebook.logLevel
                 }, (err, api) => {
                     if (err) {
                         console.error('Facebook login error:', err);
@@ -129,7 +133,7 @@ class BotManager {
             console.log('✅ ConvoX Bot is now running!');
             
             // Show menu if configured
-            if (this.config.bot.features.menu && this.config.plugins.pluginConfig.menu.showOnStart) {
+            if (this.config.features.menu) {
                 setTimeout(() => {
                     this.showWelcomeMessage();
                 }, 2000);
@@ -189,12 +193,13 @@ class BotManager {
             }
 
             // Check if message starts with prefix
-            if (!body.startsWith(this.config.bot.prefix)) {
+            const prefix = this.config.bot.prefix || '!';
+            if (!body.startsWith(prefix)) {
                 return;
             }
 
             // Extract command and arguments
-            const args = body.slice(this.config.bot.prefix.length).trim().split(' ');
+            const args = body.slice(prefix.length).trim().split(' ');
             const command = args[0].toLowerCase();
             const commandArgs = args.slice(1);
 
@@ -216,11 +221,12 @@ class BotManager {
 
     async showWelcomeMessage() {
         try {
+            const prefix = this.config.bot.prefix || '!';
             const welcomeMessage = `
 🎉 Chào mừng đến với ConvoX Bot!
 
-Gõ "${this.config.bot.prefix}menu" để xem danh sách lệnh
-Gõ "${this.config.bot.prefix}help" để được hỗ trợ
+Gõ "${prefix}menu" để xem danh sách lệnh
+Gõ "${prefix}help" để được hỗ trợ
 
 Bot đã sẵn sàng phục vụ! 🚀
             `;
