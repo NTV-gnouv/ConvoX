@@ -72,7 +72,28 @@ cd ConvoX
 npm install
 ```
 
-### 3️⃣ Cấu hình Facebook State
+### 3️⃣ Cấu hình Environment Variables
+Tạo file `.env` từ template:
+```bash
+cp env.example .env
+```
+
+Chỉnh sửa file `.env` và điền thông tin của bạn:
+```env
+# Admin User IDs (Facebook UIDs)
+ADMIN_UIDS=1000123456789 1000234567891
+
+# Bot Information
+BOT_NAME=ConvoX Bot
+BOT_PREFIX=!
+BOT_VERSION=1.0.0
+
+# Logging
+LOG_LEVEL=info
+LOG_COLORS=true
+```
+
+### 4️⃣ Cấu hình Facebook State
 Tạo file `fbstate.json` trong thư mục gốc:
 ```json
 {
@@ -83,7 +104,7 @@ Tạo file `fbstate.json` trong thư mục gốc:
 }
 ```
 
-### 4️⃣ Cấu hình Bot
+### 5️⃣ Cấu hình Bot
 Chỉnh sửa file `config/bot.json`:
 ```json
 {
@@ -100,7 +121,7 @@ Chỉnh sửa file `config/bot.json`:
 }
 ```
 
-### 5️⃣ Chạy Bot
+### 6️⃣ Chạy Bot
 ```bash
 npm start
 ```
@@ -231,12 +252,18 @@ module.exports = MyPlugin;
 | **3** | 👑 Owner | Chủ sở hữu bot | Toàn quyền |
 
 ### ⚙️ Cấu hình phân quyền
-Tạo file `.env`:
+Cấu hình trong file `.env` (đã tạo ở bước 3):
 ```env
+# Admin User IDs (Facebook UIDs)
 ADMIN_UIDS=1000123456789 1000234567891
+
+# Bot Configuration
 BOT_PREFIX=!
 BOT_NAME=ConvoX
 BOT_VERSION=1.0.0
+
+# Group Management
+GROUP_MODE=whitelist
 ```
 
 ---
@@ -360,8 +387,6 @@ Dự án này được cấp phép theo **MIT License**. Xem file [LICENSE](LICE
 ## 🌟 Dự án liên quan
 
 - 🔗 **GitHub Repository**: [ConvoX](https://github.com/NTV-gnouv/ConvoX)
-- 📱 **Facebook Page**: [ConvoX Bot](https://facebook.com/convoxbot)
-- 💬 **Community**: [Discord Server](https://discord.gg/convox)
 
 ---
 
