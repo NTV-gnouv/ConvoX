@@ -52,20 +52,25 @@ class BotManager {
             const fca = require('fca-unofficial');
             const appstate = await fs.readJson('./appstate.json');
             
-            // Initialize Facebook API with proper options
+            // Initialize Facebook API with appstate
             this.api = await new Promise((resolve, reject) => {
                 fca(appstate.fbAppState, {
-                    listenEvents: this.config.bot.facebook.listenEvents,
-                    listenTyping: this.config.bot.facebook.listenTyping,
-                    selfListen: this.config.bot.facebook.selfListen,
-                    forceLogin: true
+                    listenEvents: true,
+                    listenTyping: true,
+                    selfListen: false,
+                    forceLogin: false,
+                    logLevel: 'silent'
                 }, (err, api) => {
-                    if (err) reject(err);
-                    else resolve(api);
+                    if (err) {
+                        console.error('Facebook login error:', err);
+                        reject(err);
+                    } else {
+                        console.log('🔗 Facebook API connected successfully');
+                        resolve(api);
+                    }
                 });
             });
 
-            console.log('🔗 Facebook API connected');
         } catch (error) {
             console.error('❌ Failed to connect to Facebook:', error);
             throw error;

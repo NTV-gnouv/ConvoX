@@ -10,7 +10,7 @@ ConvoX là một Facebook Chat Bot được phát triển bởi ConvoX Team vớ
 
 • Clone project:
 ```bash
-git clone https://github.com/ConvoXTeam/ConvoXBot.git
+git clone https://github.com/NTV-gnouv/ConvoX
 cd ConvoXBot
 ```
 

@@ -1,7 +1,8 @@
 {
-  "autoUpdate": true,
-  "mqtt": {
-    "enabled": true,
-    "reconnectInterval": 3600
-  }
+  "appState": "./appstate.json",
+  "listenEvents": true,
+  "listenTyping": true,
+  "selfListen": false,
+  "forceLogin": false,
+  "logLevel": "info"
 }
