@@ -27,6 +27,10 @@ logs/
 appstate.json
 cookies.json
 session.json
+fbstate.json
+
+# Permissions and sensitive config
+config/permissions.json
 
 # Temporary files
 tmp/

@@ -1,3 +1,6 @@
+// Load environment variables first
+require('dotenv').config();
+
 const chalk = require('chalk');
 const figlet = require('figlet');
 const gradient = require('gradient-string');

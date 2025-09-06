@@ -2,9 +2,11 @@ const fs = require('fs-extra');
 const path = require('path');
 
 class PluginManager {
-    constructor(api, config) {
+    constructor(api, config, authManager, commandHandler) {
         this.api = api;
         this.config = config;
+        this.authManager = authManager;
+        this.commandHandler = commandHandler;
         this.plugins = new Map();
         this.pluginDir = config.plugins.pluginDir;
         this.autoLoad = config.plugins.autoLoad;
@@ -63,11 +65,16 @@ class PluginManager {
 
             // Load plugin module - use absolute path for require
             const PluginClass = require(path.resolve(pluginFile));
-            const plugin = new PluginClass(this.api, pluginConfig);
+            const plugin = new PluginClass(this.api, pluginConfig, this.authManager);
             
             // Initialize plugin
             if (typeof plugin.initialize === 'function') {
                 await plugin.initialize();
+            }
+
+            // Register commands if plugin has registerCommands method
+            if (typeof plugin.registerCommands === 'function' && this.commandHandler) {
+                plugin.registerCommands(this.commandHandler);
             }
 
             // Register plugin

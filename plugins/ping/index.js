@@ -1,13 +1,25 @@
 class PingPlugin {
-    constructor(api, config) {
+    constructor(api, config, authManager) {
         this.api = api;
         this.config = config;
+        this.authManager = authManager;
         this.name = 'Ping Plugin';
         this.version = '1.0.0';
     }
 
     async initialize() {
         console.log('🏓 Ping Plugin initialized');
+    }
+
+    registerCommands(commandHandler) {
+        commandHandler.registerCommand('ping', this.handlePingCommand.bind(this), {
+            description: 'Kiểm tra độ trễ của bot',
+            usage: '!ping',
+            example: '!ping',
+            category: 'utility',
+            cooldown: 2,
+            aliases: ['pong', 'latency']
+        });
     }
 
     async cleanup() {

@@ -1,7 +1,8 @@
 class CommandHandler {
-    constructor(api, config) {
+    constructor(api, config, authManager) {
         this.api = api;
         this.config = config;
+        this.authManager = authManager;
         this.commands = new Map();
         this.aliases = new Map();
         this.cooldowns = new Map();
@@ -23,6 +24,7 @@ class CommandHandler {
                 category: options.category || 'general',
                 cooldown: options.cooldown || 0,
                 adminOnly: options.adminOnly || false,
+                minRole: options.minRole || 0, // 0=USER, 1=MOD, 2=ADMIN, 3=OWNER
                 enabled: options.enabled !== false
             };
 
@@ -61,9 +63,17 @@ class CommandHandler {
                 return;
             }
 
-            // Check admin permissions
-            if (actualCommand.adminOnly && !this.isAdmin(senderID)) {
+            // Check permissions using new auth system
+            if (actualCommand.adminOnly && !this.authManager.isAdmin(senderID)) {
                 await this.sendMessage(threadID, `❌ Bạn không có quyền sử dụng lệnh này!`);
+                return;
+            }
+
+            // Check minimum role requirement
+            if (actualCommand.minRole > 0 && !this.authManager.hasPermission(senderID, actualCommand.minRole)) {
+                const roleName = this.authManager.getUserRoleName(senderID);
+                const requiredRole = this.getRoleName(actualCommand.minRole);
+                await this.sendMessage(threadID, `❌ Lệnh này yêu cầu quyền ${requiredRole} trở lên. Quyền hiện tại của bạn: ${roleName}`);
                 return;
             }
 
@@ -99,8 +109,18 @@ class CommandHandler {
         }
     }
 
+    getRoleName(roleLevel) {
+        const roleNames = {
+            0: 'User',
+            1: 'Moderator', 
+            2: 'Admin',
+            3: 'Owner'
+        };
+        return roleNames[roleLevel] || 'User';
+    }
+
     isAdmin(userID) {
-        return this.config.bot.admin.includes(userID);
+        return this.authManager.isAdmin(userID);
     }
 
     isOnCooldown(userID, command, cooldownTime) {

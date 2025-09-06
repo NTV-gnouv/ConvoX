@@ -8,6 +8,7 @@ class BotManager {
         this.commandHandler = null;
         this.pluginManager = null;
         this.menuSystem = null;
+        this.authManager = null;
         this.isRunning = false;
         this.startTime = Date.now();
     }
@@ -95,13 +96,17 @@ class BotManager {
 
     async initializeCoreSystems() {
         try {
+            // Initialize Auth Manager first
+            const AuthManager = require('./AuthManager');
+            this.authManager = new AuthManager();
+            
             // Initialize Command Handler
             const CommandHandler = require('./CommandHandler');
-            this.commandHandler = new CommandHandler(this.api, this.config);
+            this.commandHandler = new CommandHandler(this.api, this.config, this.authManager);
             
             // Initialize Plugin Manager
             const PluginManager = require('./PluginManager');
-            this.pluginManager = new PluginManager(this.api, this.config);
+            this.pluginManager = new PluginManager(this.api, this.config, this.authManager, this.commandHandler);
             
             // Initialize Menu System
             const MenuSystem = require('./MenuSystem');

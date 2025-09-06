@@ -16,7 +16,8 @@
       "qr",
       "meme",
       "avatar",
-      "admin"
+      "admin",
+      "systemadmin"
     ],
     "pluginConfig": {
       "menu": {

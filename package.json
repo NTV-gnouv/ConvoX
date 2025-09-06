@@ -21,11 +21,12 @@
   "dependencies": {
     "@dongdev/fca-unofficial": "^1.0.20",
     "axios": "^1.6.0",
-    "moment": "^2.29.4",
-    "fs-extra": "^11.1.1",
     "chalk": "^4.1.2",
+    "dotenv": "^17.2.2",
     "figlet": "^1.6.0",
-    "gradient-string": "^2.0.2"
+    "fs-extra": "^11.1.1",
+    "gradient-string": "^2.0.2",
+    "moment": "^2.29.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
