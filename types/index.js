@@ -11,8 +11,8 @@
  * @property {boolean} bot.autoMarkRead - Auto mark as read
  * @property {string} bot.logLevel - Log level
  * @property {Object} facebook - Facebook configuration
- * @property {string} facebook.appstate - AppState file path
- * @property {boolean} facebook.listenEvents - Listen to events
+ * @property {string} facebook.fbstate - FBState file path
+ * @property {string} [facebook.appstate] - (Optional) legacy AppSt
  * @property {boolean} facebook.listenTyping - Listen to typing
  * @property {boolean} facebook.selfListen - Listen to self messages
  * @property {Object} features - Feature flags

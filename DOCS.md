@@ -27,7 +27,7 @@ ConvoX chatbot thế hệ mới là một Facebook Messenger Bot được xây d
 
 ## Cấu hình
 
-### appstate.json
+### fbstate.json
 Chứa Facebook authentication state để đăng nhập vào Facebook.
 
 ### config/
@@ -70,7 +70,7 @@ pluginManager.loadPlugin(pluginPath);
 ## Troubleshooting
 
 ### Lỗi kết nối Facebook
-- Kiểm tra appstate.json
+- Kiểm tra fbstate.json
 - Đảm bảo Facebook account không bị khóa
 - Kiểm tra network connection
 

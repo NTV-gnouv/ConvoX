@@ -1,5 +1,5 @@
 {
-  "appState": "./appstate.json",
+  "appState": "./fbstate.json",
   "listenEvents": true,
   "listenTyping": true,
   "selfListen": false,
