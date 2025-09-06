@@ -18,8 +18,8 @@ cd ConvoXBot
 ```bash
 npm install
 ```
-
-•  Cấu hình appstate.json với Facebook state của bạn (chấp nhận định dạng mảng appstate hoặc đối tượng chứa trường `fbAppState`)
+### fbstate.json
+Chứa Facebook hỗ trợ định dạng appstate cũ.
 
 
 • Chạy bot:
@@ -42,7 +42,7 @@ ConvoXBot/
 ├── core/            # Core system
 ├── plugins/         # Plugin system
 ├── types/           # Type definitions
-├── appstate.json    # Facebook state
+├── fbstate.json    # Facebook state
 ├── package.json     # Dependencies
 └── index.js         # Main entry point
 ```

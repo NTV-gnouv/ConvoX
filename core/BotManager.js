@@ -51,23 +51,26 @@ class BotManager {
         try {
             const fca = require('fca-unofficial');
 
-            // Load appstate from file
-            const rawAppState = await fs.readJson('./appstate.json');
-            const appStateData = rawAppState.fbAppState || rawAppState;
+                      // Determine state file path (supports fbstate and appstate)
+                      const statePath = this.config.bot.facebook.fbstate || this.config.bot.facebook.appstate || './fbstate.json';
 
-            // Ensure appstate is in correct format
-            if (!Array.isArray(appStateData)) {
-                throw new Error('Invalid appstate format. Expected an array.');
+                      // Load state from file
+                      const rawState = await fs.readJson(statePath);
+                      const stateDataRaw = rawState.fbstate || rawState.fbState || rawState.fbAppState || rawState.appState || rawState;
+          
+                      // Ensure state is in correct format
+                      if (!Array.isArray(stateDataRaw)) {
+                          throw new Error('Invalid fbstate format. Expected an array.');
             }
 
             // Initialize Facebook API with appstate
             this.api = await new Promise((resolve, reject) => {
-                fca({ appState: appStateData }, {
-                    listenEvents: true,
-                    listenTyping: true,
-                    selfListen: false,
-                    forceLogin: false,
-                    logLevel: 'silent'
+                fca({ appState: stateDataRaw }, {
+                    listenEvents: this.config.bot.facebook.listenEvents,
+                    listenTyping: this.config.bot.facebook.listenTyping,
+                    selfListen: this.config.bot.facebook.selfListen,
+                    forceLogin: this.config.bot.facebook.forceLogin,
+                    logLevel: this.config.bot.facebook.logLevel
                 }, (err, api) => {
                     if (err) {
                         console.error('Facebook login error:', err);

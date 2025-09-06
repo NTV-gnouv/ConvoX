@@ -7,8 +7,8 @@
 
 - **Node.js**: v16.x trở lên
 - **npm**: v7.x trở lên
-- **Facebook Account**: Để lấy appstate
-- **Internet**: Kết nối ổn định
+-  **Facebook Account**: Để lấy fbstate
+- **Internet**: Kết nối ổn định 
 
 ## 🔧 Cài đặt
 
@@ -23,18 +23,15 @@ cd ConvoXBot
 npm install
 ```
 
-### 3. Cấu hình Facebook AppState
+### 3. Cấu hình Facebook FbFbState
 
 #### Cách 1: Sử dụng appstate có sẵn
-- File `appstate.json` đã được tạo sẵn với dữ liệu mẫu
-- **Lưu ý**: Cần thay thế bằng appstate của bạn
+- File `fbstate.json` đã được tạo sẵn với dữ liệu mẫu
+- **Lưu ý**: Cần thay thế bằng fbfbstate của bạn
 
-#### Cách 2: Tạo appstate mới
+#### Cách 2: Tạo FbFbstate mới
 ```bash
-# Sử dụng c3c-fbstate hoặc công cụ tương tự
-npx c3c-fbstate
-# Sau đó copy kết quả vào file appstate.json
-```
+``` 
 
 ### 4. Cấu hình bot
 Chỉnh sửa file `config/bot.json`:
@@ -160,7 +157,7 @@ tail -f logs/bot.log
 ## 🐛 Troubleshooting
 
 ### Lỗi kết nối Facebook
-1. Kiểm tra appstate.json có đúng không
+1. Kiểm tra fbstate.json có đúng không
 2. Đảm bảo Facebook account không bị khóa
 3. Thử tạo appstate mới
 

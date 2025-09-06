@@ -52,7 +52,7 @@ class BotUpdater {
             const filesToBackup = [
                 'config/',
                 'plugins/',
-                'appstate.json',
+                'fbstate.json',
                 'package.json'
             ];
 

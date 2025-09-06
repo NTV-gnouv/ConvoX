@@ -9,10 +9,12 @@
     "logLevel": "info"
   },
   "facebook": {
-    "appstate": "./appstate.json",
+    "fbstate": "./fbstate.json",
     "listenEvents": true,
     "listenTyping": true,
-    "selfListen": false
+    "selfListen": false,
+    "forceLogin": false,
+    "logLevel": "silent"
   },
   "features": {
     "menu": true,
