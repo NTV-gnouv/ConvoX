@@ -16,7 +16,7 @@
     "fca-unofficial",
     "convox"
   ],
-  "author": "Thanh Vương - ConvoX Team",
+  "author": "Thanh Vương - ConvoX Team <convoxteam@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@dongdev/fca-unofficial": "^1.0.20",

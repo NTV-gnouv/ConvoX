@@ -1,5 +1,9 @@
 <div align="center">
 
+<div align="right">
+<img src="ConvoXlogo.jpg" alt="ConvoX Logo" width="80" height="80">
+</div>
+
 # 🤖 ConvoX ChatBot
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/NTV-gnouv/ConvoX)
@@ -378,7 +382,7 @@ Dự án này được cấp phép theo **MIT License**. Xem file [LICENSE](LICE
 | Thành viên | Vai trò | Liên hệ |
 |------------|---------|---------|
 | **Thanh Vương** | 👑 Lead Developer & Creator | [GitHub](https://github.com/NTV-gnouv) |
-| **ConvoX Team** | 👥 Development Team | [GitHub](https://github.com/ConvoXTeam) |
+| **ConvoX Team** | 👥 Development Team | [GitHub](https://github.com/ConvoXTeam) • 📧 convoxteam@gmail.com |
 
 </div>
 
