@@ -1,8 +1,6 @@
 <div align="center">
 
-<div align="right">
 <img src="ConvoXlogo.jpg" alt="ConvoX Logo" width="80" height="80">
-</div>
 
 # 🤖 ConvoX ChatBot
 
@@ -378,7 +376,7 @@ Dự án này được cấp phép theo **MIT License**. Xem file [LICENSE](LICE
 <div align="center">
 
 ### 🎯 **ConvoX Team**
-
+git
 | Thành viên | Vai trò | Liên hệ |
 |------------|---------|---------|
 | **Thanh Vương** | 👑 Lead Developer & Creator | [GitHub](https://github.com/NTV-gnouv) |
