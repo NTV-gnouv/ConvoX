@@ -50,11 +50,19 @@ class BotManager {
     async initializeFacebook() {
         try {
             const fca = require('fca-unofficial');
-            const appstate = await fs.readJson('./appstate.json');
-            
+
+            // Load appstate from file
+            const rawAppState = await fs.readJson('./appstate.json');
+            const appStateData = rawAppState.fbAppState || rawAppState;
+
+            // Ensure appstate is in correct format
+            if (!Array.isArray(appStateData)) {
+                throw new Error('Invalid appstate format. Expected an array.');
+            }
+
             // Initialize Facebook API with appstate
             this.api = await new Promise((resolve, reject) => {
-                fca(appstate.fbAppState, {
+                fca({ appState: appStateData }, {
                     listenEvents: true,
                     listenTyping: true,
                     selfListen: false,
@@ -246,3 +254,4 @@ Bot đã sẵn sàng phục vụ! 🚀
 }
 
 module.exports = BotManager;
+

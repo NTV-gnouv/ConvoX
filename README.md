@@ -19,7 +19,8 @@ cd ConvoXBot
 npm install
 ```
 
-• Cấu hình appstate.json với Facebook state của bạn
+•  Cấu hình appstate.json với Facebook state của bạn (chấp nhận định dạng mảng appstate hoặc đối tượng chứa trường `fbAppState`)
+
 
 • Chạy bot:
 ```bash
