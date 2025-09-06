@@ -1,8 +1,0 @@
-{
-  "appState": "./fbstate.json",
-  "listenEvents": true,
-  "listenTyping": true,
-  "selfListen": false,
-  "forceLogin": false,
-  "logLevel": "info"
-}
