@@ -1,10 +1,15 @@
+const ErrorLogger = require('./ErrorLogger');
+
 class MenuSystem {
-    constructor(api, config) {
+    constructor(api, config, authManager, logger) {
         this.api = api;
         this.config = config;
         this.commands = config.commands;
         this.menuConfig = config.commands.menu;
         this.categories = config.commands.categories;
+        this.errorLogger = new ErrorLogger(logger);
+        this.authManager = authManager;
+        this.logger = logger;
     }
 
     isMenuCommand(command, args) {
@@ -34,8 +39,13 @@ class MenuSystem {
                     break;
             }
         } catch (error) {
-            console.error('❌ Error handling menu command:', error);
-            await this.sendMessage(event.threadID, '❌ Đã xảy ra lỗi khi hiển thị menu!');
+            this.logger.logError(error, 'Error handling menu command');
+            // Try to send a simple error message
+            try {
+                await this.sendMessage(event.threadID, '❌ Đã xảy ra lỗi khi hiển thị menu!');
+            } catch (fallbackError) {
+                this.logger.logError(fallbackError, 'Fallback error message also failed');
+            }
         }
     }
 
@@ -99,19 +109,33 @@ class MenuSystem {
 • Chọn số thứ tự category để xem lệnh (VD: 1, 2, 3...)
 • Gõ lệnh với prefix \`${this.config.bot.prefix}\` (VD: \`${this.config.bot.prefix}ping\`)
 
-🎯 **Các lệnh cơ bản:**
+🎯 **Lệnh cơ bản:**
 • \`${this.config.bot.prefix}menu\` - Hiển thị menu chính
 • \`${this.config.bot.prefix}help\` - Hiển thị hướng dẫn này
 • \`${this.config.bot.prefix}info\` - Thông tin bot
 • \`${this.config.bot.prefix}ping\` - Kiểm tra ping
 
+🎮 **Lệnh giải trí:**
+• \`${this.config.bot.prefix}dice\` - Gieo xúc xắc
+• \`${this.config.bot.prefix}flip\` - Tung đồng xu
+• \`${this.config.bot.prefix}joke\` - Kể chuyện cười
+
 ❓ **Cần hỗ trợ?**
 Liên hệ admin để được hỗ trợ thêm!
             `;
             
-            await this.sendMessage(threadID, helpText);
+            const result = await this.sendMessage(threadID, helpText);
+            if (!result) {
+                console.log('ℹ️ Help command processed (message delivery failed)');
+            }
         } catch (error) {
             console.error('❌ Error showing help:', error);
+            // Try to send a simple fallback message
+            try {
+                await this.sendMessage(threadID, '❌ Không thể hiển thị hướng dẫn. Vui lòng thử lại sau!');
+            } catch (fallbackError) {
+                console.error('❌ Fallback help message also failed:', fallbackError);
+            }
         }
     }
 
@@ -174,12 +198,22 @@ Liên hệ admin để được hỗ trợ thêm!
         }
     }
 
-    async sendMessage(threadID, message) {
-        try {
-            return await this.api.sendMessage(message, threadID);
-        } catch (error) {
-            console.error('❌ Failed to send message:', error);
-            throw error;
+    async sendMessage(threadID, message, retries = 2) {
+        for (let attempt = 0; attempt <= retries; attempt++) {
+            try {
+                return await this.api.sendMessage(message, threadID);
+            } catch (error) {
+                if (attempt === retries) {
+                    // Final attempt failed
+                    this.errorLogger.logError('Send message failed', error);
+                    return null;
+                }
+                
+                // Wait a bit before retry
+                if (attempt < retries) {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+            }
         }
     }
 

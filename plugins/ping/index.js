@@ -8,7 +8,7 @@ class PingPlugin {
     }
 
     async initialize() {
-        console.log('🏓 Ping Plugin initialized');
+        // Plugin initialized silently
     }
 
     registerCommands(commandHandler) {
@@ -23,7 +23,7 @@ class PingPlugin {
     }
 
     async cleanup() {
-        console.log('🏓 Ping Plugin cleaned up');
+        // Plugin cleaned up silently
     }
 
     async handlePingCommand(event, args) {

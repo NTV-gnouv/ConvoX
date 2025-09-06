@@ -5,6 +5,10 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 const gradient = require('gradient-string');
 const BotManager = require('./core/BotManager');
+const Logger = require('./core/Logger');
+
+// Initialize logger
+const logger = new Logger();
 
 // Banner
 const banner = figlet.textSync('ConvoX Bot', {
@@ -22,17 +26,17 @@ console.log('');
 
 // Error handling
 process.on('uncaughtException', (error) => {
-    console.error(chalk.red('❌ Uncaught Exception:'), error);
+    logger.logError(error, 'Uncaught Exception');
     process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
-    console.error(chalk.red('❌ Unhandled Rejection at:'), promise, chalk.red('reason:'), reason);
+    logger.logError(reason, 'Unhandled Rejection');
 });
 
 // Graceful shutdown
 process.on('SIGINT', async () => {
-    console.log(chalk.yellow('\n🛑 Received SIGINT. Shutting down gracefully...'));
+    logger.system('Received SIGINT. Shutting down gracefully...');
     if (global.botManager) {
         await global.botManager.stop();
     }
@@ -40,7 +44,7 @@ process.on('SIGINT', async () => {
 });
 
 process.on('SIGTERM', async () => {
-    console.log(chalk.yellow('\n🛑 Received SIGTERM. Shutting down gracefully...'));
+    logger.system('Received SIGTERM. Shutting down gracefully...');
     if (global.botManager) {
         await global.botManager.stop();
     }
@@ -50,7 +54,7 @@ process.on('SIGTERM', async () => {
 // Main function
 async function main() {
     try {
-        console.log(chalk.blue('🔧 Initializing ConvoX Bot...'));
+        logger.system('Initializing ConvoX Bot...');
         
         // Create bot manager
         const botManager = new BotManager();
@@ -59,15 +63,15 @@ async function main() {
         // Initialize bot
         const initialized = await botManager.initialize();
         if (!initialized) {
-            console.error(chalk.red('❌ Failed to initialize bot'));
+            logger.logError(error, 'Failed to initialize bot');
             process.exit(1);
         }
         
         // Start bot
         await botManager.start();
         
-        console.log(chalk.green('✅ ConvoX Bot is running successfully!'));
-        console.log(chalk.gray('💡 Press Ctrl+C to stop the bot'));
+        logger.success('ConvoX Bot is running successfully!');
+        logger.info('Press Ctrl+C to stop the bot');
         
         // Keep the process alive
         setInterval(() => {
@@ -75,7 +79,7 @@ async function main() {
         }, 1000);
         
     } catch (error) {
-        console.error(chalk.red('❌ Failed to start ConvoX Bot:'), error);
+        logger.logError(error, 'Failed to start ConvoX Bot');
         process.exit(1);
     }
 }

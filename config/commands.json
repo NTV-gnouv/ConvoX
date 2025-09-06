@@ -29,22 +29,10 @@
       "description": "Các công cụ tiện ích",
       "commands": [
         {
-          "name": "weather",
-          "description": "Xem thời tiết",
-          "usage": "!weather [city]",
-          "example": "!weather Hanoi"
-        },
-        {
-          "name": "translate",
-          "description": "Dịch văn bản",
-          "usage": "!translate [text] [to_lang]",
-          "example": "!translate hello vi"
-        },
-        {
-          "name": "qr",
-          "description": "Tạo mã QR",
-          "usage": "!qr [text]",
-          "example": "!qr Hello World"
+          "name": "ping",
+          "description": "Kiểm tra ping",
+          "usage": "!ping",
+          "example": "!ping"
         }
       ]
     },
@@ -73,24 +61,6 @@
       ]
     },
     "4": {
-      "name": "🎨 Media & Images",
-      "description": "Xử lý media và hình ảnh",
-      "commands": [
-        {
-          "name": "meme",
-          "description": "Tạo meme",
-          "usage": "!meme [text1] [text2]",
-          "example": "!meme Hello World"
-        },
-        {
-          "name": "avatar",
-          "description": "Tạo avatar",
-          "usage": "!avatar [name]",
-          "example": "!avatar John"
-        }
-      ]
-    },
-    "5": {
       "name": "⚙️ Admin & Settings",
       "description": "Quản trị và cài đặt",
       "commands": [

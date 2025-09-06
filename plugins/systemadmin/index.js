@@ -10,7 +10,7 @@ class SystemAdminPlugin {
     }
 
     async initialize() {
-        console.log('🔧 System Admin Plugin initialized');
+        // Plugin initialized silently
     }
 
     registerCommands(commandHandler) {
@@ -199,7 +199,7 @@ class SystemAdminPlugin {
     }
 
     async cleanup() {
-        console.log('🔧 System Admin Plugin cleaned up');
+        // Plugin cleaned up silently
     }
 }
 

@@ -7,11 +7,11 @@ class MenuPlugin {
     }
 
     async initialize() {
-        console.log('📋 Menu Plugin initialized');
+        // Plugin initialized silently
     }
 
     async cleanup() {
-        console.log('📋 Menu Plugin cleaned up');
+        // Plugin cleaned up silently
     }
 
     // Plugin methods can be called by the core system

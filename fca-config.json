@@ -1,8 +1,7 @@
 {
-  "appState": "./fbstate.json",
-  "listenEvents": true,
-  "listenTyping": true,
-  "selfListen": false,
-  "forceLogin": false,
-  "logLevel": "info"
+  "autoUpdate": true,
+  "mqtt": {
+    "enabled": true,
+    "reconnectInterval": 3600
+  }
 }

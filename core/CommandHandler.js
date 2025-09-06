@@ -1,8 +1,11 @@
+const Logger = require('./Logger');
+
 class CommandHandler {
-    constructor(api, config, authManager) {
+    constructor(api, config, authManager, logger) {
         this.api = api;
         this.config = config;
         this.authManager = authManager;
+        this.logger = logger;
         this.commands = new Map();
         this.aliases = new Map();
         this.cooldowns = new Map();
@@ -37,10 +40,11 @@ class CommandHandler {
                 });
             }
 
-            console.log(`✅ Command registered: ${command}`);
+            // Don't log individual command registration to reduce spam
+            // this.logger.info(`Command registered: ${command}`);
             return true;
         } catch (error) {
-            console.error(`❌ Failed to register command ${command}:`, error);
+            this.logger.logError(error, `Failed to register command ${command}`);
             return false;
         }
     }
@@ -91,21 +95,35 @@ class CommandHandler {
             this.updateStats(command, actualCommand.category);
 
             // Execute command
-            console.log(`🎯 Executing command: ${command} by ${senderID}`);
+            this.logger.debug(`Executing command: ${command} by ${senderID}`);
             await actualCommand.handler(event, args);
 
         } catch (error) {
-            console.error(`❌ Error handling command ${command}:`, error);
+            this.logger.logError(error, `Error handling command ${command}`);
             await this.sendMessage(event.threadID, `❌ Đã xảy ra lỗi khi thực hiện lệnh!`);
         }
     }
 
-    async sendMessage(threadID, message, callback) {
-        try {
-            return await this.api.sendMessage(message, threadID, callback);
-        } catch (error) {
-            console.error('❌ Failed to send message:', error);
-            throw error;
+    async sendMessage(threadID, message, callback, retries = 2) {
+        for (let attempt = 0; attempt <= retries; attempt++) {
+            try {
+                return await this.api.sendMessage(message, threadID, callback);
+            } catch (error) {
+                if (attempt === retries) {
+                    // Final attempt failed
+                    if (error.statusCode === 404) {
+                        this.logger.throttledLog('warn', 'Facebook API temporarily unavailable (404)', null, 'api_404');
+                    } else {
+                        this.logger.throttledLog('warn', `Send message failed: ${error.message || 'Unknown error'}`, null, 'send_message_error');
+                    }
+                    return null;
+                }
+                
+                // Wait a bit before retry
+                if (attempt < retries) {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+            }
         }
     }
 
@@ -205,10 +223,10 @@ class CommandHandler {
         try {
             // This would reload a specific command from file
             // Implementation depends on how commands are loaded
-            console.log(`🔄 Reloading command: ${command}`);
+            this.logger.info(`Reloading command: ${command}`);
             return true;
         } catch (error) {
-            console.error(`❌ Failed to reload command ${command}:`, error);
+            this.logger.logError(error, `Failed to reload command ${command}`);
             return false;
         }
     }

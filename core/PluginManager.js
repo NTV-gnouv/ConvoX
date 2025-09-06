@@ -1,12 +1,14 @@
 const fs = require('fs-extra');
 const path = require('path');
+const Logger = require('./Logger');
 
 class PluginManager {
-    constructor(api, config, authManager, commandHandler) {
+    constructor(api, config, authManager, commandHandler, logger) {
         this.api = api;
         this.config = config;
         this.authManager = authManager;
         this.commandHandler = commandHandler;
+        this.logger = logger;
         this.plugins = new Map();
         this.pluginDir = config.plugins.pluginDir;
         this.autoLoad = config.plugins.autoLoad;
@@ -15,7 +17,7 @@ class PluginManager {
 
     async loadPlugins() {
         try {
-            console.log('🔌 Loading plugins...');
+            this.logger.system('Loading plugins...');
             
             // Ensure plugin directory exists
             await fs.ensureDir(this.pluginDir);
@@ -30,9 +32,9 @@ class PluginManager {
             // Load additional plugins from directory
             await this.loadPluginsFromDirectory();
             
-            console.log(`✅ Loaded ${this.plugins.size} plugins`);
+            this.logger.success(`Loaded ${this.plugins.size} plugins`);
         } catch (error) {
-            console.error('❌ Failed to load plugins:', error);
+            this.logger.logError(error, 'Failed to load plugins');
             throw error;
         }
     }
@@ -44,13 +46,13 @@ class PluginManager {
             
             // Check if plugin exists
             if (!await fs.pathExists(pluginFile)) {
-                console.log(`⚠️ Plugin ${pluginName} not found at ${pluginFile}`);
+                this.logger.warn(`Plugin ${pluginName} not found at ${pluginFile}`);
                 return false;
             }
 
             // Check if plugin is already loaded
             if (this.plugins.has(pluginName)) {
-                console.log(`⚠️ Plugin ${pluginName} is already loaded`);
+                this.logger.warn(`Plugin ${pluginName} is already loaded`);
                 return true;
             }
 
@@ -59,13 +61,13 @@ class PluginManager {
             
             // Check if plugin is enabled
             if (pluginConfig.enabled === false) {
-                console.log(`⚠️ Plugin ${pluginName} is disabled`);
+                this.logger.warn(`Plugin ${pluginName} is disabled`);
                 return false;
             }
 
             // Load plugin module - use absolute path for require
             const PluginClass = require(path.resolve(pluginFile));
-            const plugin = new PluginClass(this.api, pluginConfig, this.authManager);
+            const plugin = new PluginClass(this.api, pluginConfig, this.authManager, this.logger);
             
             // Initialize plugin
             if (typeof plugin.initialize === 'function') {
@@ -73,9 +75,12 @@ class PluginManager {
             }
 
             // Register commands if plugin has registerCommands method
+            const commandsBefore = this.commandHandler.getCommandCount();
             if (typeof plugin.registerCommands === 'function' && this.commandHandler) {
                 plugin.registerCommands(this.commandHandler);
             }
+            const commandsAfter = this.commandHandler.getCommandCount();
+            const commandsRegistered = commandsAfter - commandsBefore;
 
             // Register plugin
             this.plugins.set(pluginName, {
@@ -85,10 +90,10 @@ class PluginManager {
                 loadedAt: Date.now()
             });
 
-            console.log(`✅ Plugin loaded: ${pluginName}`);
+            // Plugin loaded successfully (no individual logging to reduce console spam)
             return true;
         } catch (error) {
-            console.error(`❌ Failed to load plugin ${pluginName}:`, error);
+            this.logger.logError(error, `Failed to load plugin ${pluginName}`);
             return false;
         }
     }
@@ -109,7 +114,7 @@ class PluginManager {
                 }
             }
         } catch (error) {
-            console.error('❌ Failed to load plugins from directory:', error);
+            this.logger.logError(error, 'Failed to load plugins from directory');
         }
     }
 
@@ -117,7 +122,7 @@ class PluginManager {
         try {
             const plugin = this.plugins.get(pluginName);
             if (!plugin) {
-                console.log(`⚠️ Plugin ${pluginName} is not loaded`);
+                this.logger.warn(`Plugin ${pluginName} is not loaded`);
                 return false;
             }
 
@@ -129,17 +134,17 @@ class PluginManager {
             // Remove from plugins map
             this.plugins.delete(pluginName);
             
-            console.log(`✅ Plugin unloaded: ${pluginName}`);
+            this.logger.plugin('unloaded', pluginName);
             return true;
         } catch (error) {
-            console.error(`❌ Failed to unload plugin ${pluginName}:`, error);
+            this.logger.logError(error, `Failed to unload plugin ${pluginName}`);
             return false;
         }
     }
 
     async reloadPlugin(pluginName) {
         try {
-            console.log(`🔄 Reloading plugin: ${pluginName}`);
+            this.logger.info(`Reloading plugin: ${pluginName}`);
             
             // Unload first
             await this.unloadPlugin(pluginName);
@@ -151,10 +156,10 @@ class PluginManager {
             // Load again
             await this.loadPlugin(pluginName);
             
-            console.log(`✅ Plugin reloaded: ${pluginName}`);
+            this.logger.plugin('reloaded', pluginName);
             return true;
         } catch (error) {
-            console.error(`❌ Failed to reload plugin ${pluginName}:`, error);
+            this.logger.logError(error, `Failed to reload plugin ${pluginName}`);
             return false;
         }
     }
@@ -196,12 +201,12 @@ class PluginManager {
                     await this.loadPlugin(pluginName);
                 }
                 
-                console.log(`✅ Plugin enabled: ${pluginName}`);
+                this.logger.plugin('enabled', pluginName);
                 return true;
             }
             return false;
         } catch (error) {
-            console.error(`❌ Failed to enable plugin ${pluginName}:`, error);
+                this.logger.logError(error, `Failed to enable plugin ${pluginName}`);
             return false;
         }
     }
@@ -217,12 +222,12 @@ class PluginManager {
                     await this.unloadPlugin(pluginName);
                 }
                 
-                console.log(`✅ Plugin disabled: ${pluginName}`);
+                this.logger.plugin('disabled', pluginName);
                 return true;
             }
             return false;
         } catch (error) {
-            console.error(`❌ Failed to disable plugin ${pluginName}:`, error);
+                this.logger.logError(error, `Failed to disable plugin ${pluginName}`);
             return false;
         }
     }
@@ -232,7 +237,7 @@ class PluginManager {
             const configPath = './config/plugins.json';
             await fs.writeJson(configPath, this.config.plugins, { spaces: 2 });
         } catch (error) {
-            console.error('❌ Failed to save plugin config:', error);
+            this.logger.logError(error, 'Failed to save plugin config');
         }
     }
 
@@ -250,14 +255,14 @@ class PluginManager {
             watcher.on('change', async (filePath) => {
                 const pluginName = path.basename(path.dirname(filePath));
                 if (this.plugins.has(pluginName)) {
-                    console.log(`🔄 Hot reloading plugin: ${pluginName}`);
+                    this.logger.info(`Hot reloading plugin: ${pluginName}`);
                     await this.reloadPlugin(pluginName);
                 }
             });
 
-            console.log('🔥 Hot reload enabled for plugins');
+            this.logger.info('Hot reload enabled for plugins');
         } catch (error) {
-            console.error('❌ Failed to setup hot reload:', error);
+            this.logger.logError(error, 'Failed to setup hot reload');
         }
     }
 }

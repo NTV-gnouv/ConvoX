@@ -6,16 +6,9 @@
     "pluginDir": "./plugins",
     "defaultPlugins": [
       "menu",
+      "help",
       "info",
       "ping",
-      "dice",
-      "flip",
-      "joke",
-      "weather",
-      "translate",
-      "qr",
-      "meme",
-      "avatar",
       "admin",
       "systemadmin"
     ],
@@ -33,6 +26,10 @@
       "ping": {
         "enabled": true,
         "showLatency": true
+      },
+      "help": {
+        "enabled": true,
+        "showDetailedGuide": true
       }
     }
   }

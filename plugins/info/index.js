@@ -8,11 +8,11 @@ class InfoPlugin {
     }
 
     async initialize() {
-        console.log('ℹ️ Info Plugin initialized');
+        // Plugin initialized silently
     }
 
     async cleanup() {
-        console.log('ℹ️ Info Plugin cleaned up');
+        // Plugin cleaned up silently
     }
 
     async handleInfoCommand(event, args) {
