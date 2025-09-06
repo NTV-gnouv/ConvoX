@@ -1,21 +1,120 @@
-MIT License
+================================================================================
+                               CONVOX BOT LICENSE
+                               GIẤY PHÉP CONVOX BOT
+================================================================================
 
-Copyright (c) 2025 Thanh Vương - ConvoX Team
+Copyright (c) 2025 ConvoX Team & Thanh Vương
+All rights reserved. | Mọi quyền được bảo lưu.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+================================================================================
+                               ENGLISH VERSION
+================================================================================
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+ConvoX Bot Open Source License
+Version 1.0 - Community Edition
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+This project is released under a custom open source license that allows free
+use, modification, and distribution while maintaining proper attribution.
+
+TERMS OF USE:
+
+✅ WHAT YOU CAN DO:
+- Use ConvoX Bot for personal and educational purposes
+- Modify the code to fit your needs
+- Share your modifications with others
+- Create plugins and extensions
+- Use in non-commercial projects
+
+❌ WHAT YOU CANNOT DO:
+- Remove copyright notices or author credits
+- Use ConvoX branding without permission
+- Sell the software as your own product
+- Use for illegal or harmful activities
+- Claim ownership of the original code
+
+📋 ATTRIBUTION REQUIREMENTS:
+If you use, modify, or distribute this software, you must:
+- Keep the original copyright notice
+- Credit ConvoX Team and Thanh Vương
+- Include a link to: https://github.com/ConvoXTeam/ConvoXBot
+- Mention that it's based on ConvoX Bot
+
+⚠️ DISCLAIMER:
+This software is provided "as is" without any warranties. The authors are not
+responsible for any damages or issues that may arise from using this software.
+Use at your own risk and comply with Facebook's Terms of Service.
+
+================================================================================
+                               PHIÊN BẢN TIẾNG VIỆT
+================================================================================
+
+Giấy phép Mã nguồn mở ConvoX Bot
+Phiên bản 1.0 - Phiên bản Cộng đồng
+
+Dự án này được phát hành dưới giấy phép mã nguồn mở tùy chỉnh cho phép sử dụng,
+chỉnh sửa và phân phối miễn phí trong khi duy trì ghi công thích hợp.
+
+ĐIỀU KHOẢN SỬ DỤNG:
+
+✅ BẠN CÓ THỂ:
+- Sử dụng ConvoX Bot cho mục đích cá nhân và giáo dục
+- Chỉnh sửa mã nguồn theo nhu cầu của bạn
+- Chia sẻ các chỉnh sửa của bạn với người khác
+- Tạo plugin và tiện ích mở rộng
+- Sử dụng trong các dự án phi thương mại
+
+❌ BẠN KHÔNG THỂ:
+- Xóa thông báo bản quyền hoặc ghi công tác giả
+- Sử dụng thương hiệu ConvoX mà không có phép
+- Bán phần mềm như sản phẩm của riêng bạn
+- Sử dụng cho các hoạt động bất hợp pháp hoặc có hại
+- Tuyên bố quyền sở hữu đối với mã nguồn gốc
+
+📋 YÊU CẦU GHI CÔNG:
+Nếu bạn sử dụng, chỉnh sửa hoặc phân phối phần mềm này, bạn phải:
+- Giữ nguyên thông báo bản quyền gốc
+- Ghi công ConvoX Team và Thanh Vương
+- Bao gồm liên kết đến: https://github.com/ConvoXTeam/ConvoXBot
+- Đề cập rằng nó dựa trên ConvoX Bot
+
+⚠️ TỪ CHỐI TRÁCH NHIỆM:
+Phần mềm này được cung cấp "như vậy" mà không có bất kỳ bảo hành nào. 
+Các tác giả không chịu trách nhiệm cho bất kỳ thiệt hại hoặc vấn đề nào 
+có thể phát sinh từ việc sử dụng phần mềm này. Sử dụng với rủi ro của 
+bạn và tuân thủ Điều khoản Dịch vụ của Facebook.
+
+================================================================================
+                               PROJECT INFO
+                               THÔNG TIN DỰ ÁN
+================================================================================
+
+🚀 ConvoX Bot - Next Generation Facebook Chatbot Framework
+🚀 ConvoX Bot - Khung Chatbot Facebook Thế Hệ Mới
+
+📁 GitHub: https://github.com/ConvoXTeam/ConvoXBot
+👨‍💻 Creator: Thanh Vương
+👥 Team: ConvoX Team
+📱 Made with: fca-unofficial library
+🌐 Website: https://convoxbot.com
+
+💡 This is a community-driven open source project.
+💡 Đây là dự án mã nguồn mở do cộng đồng phát triển.
+
+================================================================================
+                               SPECIAL THANKS
+                               LỜI CẢM ƠN ĐẶC BIỆT
+================================================================================
+
+🙏 Thanks to the open source community for inspiration
+🙏 Cảm ơn cộng đồng mã nguồn mở đã truyền cảm hứng
+
+🙏 Thanks to fca-unofficial developers
+🙏 Cảm ơn các nhà phát triển fca-unofficial
+
+🙏 Thanks to all contributors and users
+🙏 Cảm ơn tất cả người đóng góp và người dùng
+
+================================================================================
+                               END OF LICENSE
+                               KẾT THÚC GIẤY PHÉP
+================================================================================

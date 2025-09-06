@@ -63,7 +63,7 @@ async function main() {
         // Initialize bot
         const initialized = await botManager.initialize();
         if (!initialized) {
-            logger.logError(error, 'Failed to initialize bot');
+            logger.logError(new Error('Bot initialization failed'), 'Failed to initialize bot');
             process.exit(1);
         }
         
