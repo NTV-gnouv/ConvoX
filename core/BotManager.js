@@ -35,10 +35,11 @@ class BotManager {
 
     async loadConfig() {
         try {
+            const pluginsConfig = await fs.readJson('./config/plugins.json');
             this.config = {
                 bot: await fs.readJson('./config/bot.json'),
                 commands: await fs.readJson('./config/commands.json'),
-                plugins: await fs.readJson('./config/plugins.json')
+                plugins: pluginsConfig.plugins || pluginsConfig
             };
             console.log('📋 Configuration loaded');
         } catch (error) {
@@ -91,15 +92,15 @@ class BotManager {
     async initializeCoreSystems() {
         try {
             // Initialize Command Handler
-            const CommandHandler = require('./core/CommandHandler');
+            const CommandHandler = require('./CommandHandler');
             this.commandHandler = new CommandHandler(this.api, this.config);
             
             // Initialize Plugin Manager
-            const PluginManager = require('./core/PluginManager');
+            const PluginManager = require('./PluginManager');
             this.pluginManager = new PluginManager(this.api, this.config);
             
             // Initialize Menu System
-            const MenuSystem = require('./core/MenuSystem');
+            const MenuSystem = require('./MenuSystem');
             this.menuSystem = new MenuSystem(this.api, this.config);
             
             console.log('⚙️ Core systems initialized');
