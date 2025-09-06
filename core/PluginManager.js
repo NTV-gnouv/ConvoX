@@ -67,7 +67,11 @@ class PluginManager {
 
             // Load plugin module - use absolute path for require
             const PluginClass = require(path.resolve(pluginFile));
+<<<<<<< HEAD
             const plugin = new PluginClass(this.api, pluginConfig, this.authManager, this.logger);
+=======
+            const plugin = new PluginClass(this.api, pluginConfig);
+>>>>>>> f8065757ac9d1ed799b23b328b5d8a92943d64cf
             
             // Initialize plugin
             if (typeof plugin.initialize === 'function') {

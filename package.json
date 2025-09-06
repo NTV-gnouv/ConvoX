@@ -20,6 +20,12 @@
   "license": "MIT",
   "dependencies": {
     "@dongdev/fca-unofficial": "^1.0.20",
+<<<<<<< HEAD
+=======
+    "axios": "^1.6.0",
+    "moment": "^2.29.4",
+    "fs-extra": "^11.1.1",
+>>>>>>> f8065757ac9d1ed799b23b328b5d8a92943d64cf
     "chalk": "^4.1.2",
     "dotenv": "^17.2.2",
     "figlet": "^1.6.0",

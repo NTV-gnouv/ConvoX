@@ -139,6 +139,7 @@ class BotManager {
             
             // Initialize Command Handler
             const CommandHandler = require('./CommandHandler');
+<<<<<<< HEAD
             this.commandHandler = new CommandHandler(this.api, this.config, this.authManager, this.logger);
             
             // Initialize Plugin Manager
@@ -148,6 +149,17 @@ class BotManager {
             // Initialize Menu System
             const MenuSystem = require('./MenuSystem');
             this.menuSystem = new MenuSystem(this.api, this.config, this.authManager, this.logger);
+=======
+            this.commandHandler = new CommandHandler(this.api, this.config);
+            
+            // Initialize Plugin Manager
+            const PluginManager = require('./PluginManager');
+            this.pluginManager = new PluginManager(this.api, this.config);
+            
+            // Initialize Menu System
+            const MenuSystem = require('./MenuSystem');
+            this.menuSystem = new MenuSystem(this.api, this.config);
+>>>>>>> f8065757ac9d1ed799b23b328b5d8a92943d64cf
             
             if (this.logger) {
                 this.logger.system('Core systems initialized');

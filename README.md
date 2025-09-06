@@ -20,10 +20,15 @@ cd ConvoX
 ```bash
 npm install
 ```
+<<<<<<< HEAD
 
 ### 3. Cấu hình Facebook FbState
 - File `fbstate.json` đã được tạo sẵn với dữ liệu mẫu
 - **Lưu ý**: Cần thay thế bằng fbstate của bạn
+=======
+### fbstate.json
+Chứa Facebook hỗ trợ định dạng appstate cũ.
+>>>>>>> f8065757ac9d1ed799b23b328b5d8a92943d64cf
 
 ### 4. Cấu hình bot
 Chỉnh sửa file `config/bot.json`:
@@ -69,12 +74,16 @@ ConvoX/
 │   ├── Logger.js
 │   └── MenuSystem.js
 ├── plugins/         # Plugin system
+<<<<<<< HEAD
 │   ├── admin/
 │   ├── help/
 │   ├── info/
 │   ├── menu/
 │   ├── ping/
 │   └── systemadmin/
+=======
+├── types/           # Type definitions
+>>>>>>> f8065757ac9d1ed799b23b328b5d8a92943d64cf
 ├── fbstate.json    # Facebook state
 ├── package.json     # Dependencies
 └── index.js         # Main entry point
