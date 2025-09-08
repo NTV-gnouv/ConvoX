@@ -1,0 +1,45 @@
+{
+  "name": "convox-chatbot",
+  "version": "1.0.0",
+  "description": "ConvoX chatbot thế hệ mới",
+  "main": "index.js",
+  "scripts": {
+    "start": "cls && cross-env NPM_CONFIG_SILENT=true NPM_CONFIG_LOGLEVEL=silent NPM_CONFIG_FUND=false NPM_CONFIG_AUDIT=false node --disable-warning=DeprecationWarning index.js",
+    "dev": "nodemon --disable-warning=DeprecationWarning index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-cookie": "node test/test-cookie.js",
+    "test-restart": "node test/test-auto-restart.js",
+    "cookie": "node test/cookie-manager.js"
+  },
+  "keywords": [
+    "facebook",
+    "chatbot",
+    "messenger",
+    "bot",
+    "fca-unofficial",
+    "convox"
+  ],
+  "author": "Thanh Vương - ConvoX Team <convoxteam@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@dongdev/fca-unofficial": "^1.0.20",
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.6.0",
+    "chalk": "^4.1.2",
+    "dotenv": "^17.2.2",
+    "figlet": "^1.6.0",
+    "fs-extra": "^11.1.1",
+    "gradient-string": "^2.0.2",
+    "mkdirp": "^3.0.1",
+    "moment": "^2.29.4",
+    "node-fetch": "^3.3.2",
+    "yt-dlp-exec": "^1.0.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

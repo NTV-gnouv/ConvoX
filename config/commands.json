@@ -1,0 +1,221 @@
+{
+  "categories": {
+    "1": {
+      "name": "Tiện ích",
+      "description": "Các công cụ tiện ích",
+      "commands": [
+        {
+          "name": "ping",
+          "description": "Kiểm tra độ trễ của bot",
+          "usage": "!ping",
+          "example": "!ping",
+          "aliases": ["pong", "latency"],
+          "cooldown": 2,
+          "minRole": 0,
+          "scope": "global"
+        },
+        {
+          "name": "trans",
+          "description": "Dịch văn bản",
+          "usage": "!trans [đích] / !trans [nguồn -> đích] / !trans [đích] [văn bản]",
+          "example": "!trans vi (reply) / !trans ukraina -> vietnam / !trans en Xin chào",
+          "aliases": ["translate", "dich"],
+          "cooldown": 2,
+          "minRole": 0,
+          "scope": "global"
+        },
+        {
+          "name": "weather",
+          "description": "Xem thời tiết theo địa điểm",
+          "usage": "!weather [now|daily] <địa điểm>",
+          "example": "!weather Hà Nội",
+          "cooldown": 8,
+          "minRole": 0,
+          "scope": "global"
+        },
+        {
+          "name": "phatnguoi",
+          "description": "Tra cứu phạt nguội xe Việt Nam theo biển số",
+          "usage": "!phatnguoi <biển_số> [6_số_khung]",
+          "example": "!phatnguoi 30A-123.45 | !phatnguoi 51F12345 ABC123",
+          "cooldown": 8,
+          "minRole": 0,
+          "scope": "global",
+          "notes": "Không có alias; một số cổng yêu cầu 6 số cuối số khung để xác thực"
+        },
+        {
+          "name": "nn",
+          "description": "Hẹn giờ gửi 1 voice ngẫu nhiên chúc ngủ ngon (khung 19:00–04:00).",
+          "usage": "!nn <giờ> | !nn off",
+          "example": "!nn 22h | !nn 22:30 | !nn off",
+          "cooldown": 3,
+          "minRole": 1,
+          "scope": "per-box",
+          "notes": "Chỉ dùng trong box đã duyệt. Thời gian phải nằm trong 19:00→04:00; sau khi set sẽ gửi 1 voice để đánh dấu."
+        }
+      ]
+    },
+    "2": {
+      "name": "Thông tin",
+      "description": "Thông tin và trợ giúp",
+      "commands": [
+        {
+          "name": "info",
+          "description": "Thông tin theo cấp bậc và tra cứu người dùng/nhóm",
+          "usage": "!info | !info @user | !info <userID|threadID>",
+          "example": "!info | !info @NTV | !info 1234567890123456",
+          "cooldown": 3,
+          "minRole": 0,
+          "scope": "global",
+          "notes": "MOD+ mới dùng được @tag hoặc <ID> để xem thông tin chi tiết"
+        },
+        {
+          "name": "whoami",
+          "description": "Kiểm tra quyền của bạn",
+          "usage": "!whoami",
+          "example": "!whoami",
+          "aliases": ["me", "role"],
+          "minRole": 0,
+          "scope": "global"
+        }
+      ]
+    },
+    "3": {
+      "name": "Admin",
+      "description": "Quản trị và cài đặt",
+      "commands": [
+        {
+          "name": "admin",
+          "description": "Quản lý phân quyền admin/moderator (toàn hệ thống)",
+          "usage": "!admin <grant|revoke|list|whoami> [userID]",
+          "example": "!admin grant 1000123456789",
+          "aliases": ["adm", "permission"],
+          "minRole": 3,
+          "scope": "global"
+        },
+        {
+          "name": "group",
+          "description": "Quản lý nhóm: allow/disallow/block/unblock/list/mode/clear",
+          "usage": "!group <allow|disallow|block|unblock|list|mode|clear> [threadID]",
+          "example": "!group allow 1234567890123456",
+          "aliases": ["groups", "chat"],
+          "minRole": 2,
+          "scope": "global",
+          "notes": "Có thể reply thông báo phê duyệt với '!group allow' để duyệt nhanh (tự map threadID)"
+        },
+        {
+          "name": "groupinfo",
+          "description": "Kiểm tra quyền nhóm hiện tại",
+          "usage": "!groupinfo",
+          "example": "!groupinfo",
+          "aliases": ["ginfo", "chatinfo"],
+          "minRole": 0,
+          "scope": "per-box"
+        },
+        {
+          "name": "grouprun",
+          "description": "Danh sách box đã duyệt (Admin+)",
+          "usage": "!grouprun",
+          "example": "!grouprun",
+          "minRole": 2,
+          "scope": "global"
+        },
+        {
+          "name": "groupwait",
+          "description": "Danh sách box đang chờ phê duyệt (Admin+)",
+          "usage": "!groupwait",
+          "example": "!groupwait",
+          "minRole": 2,
+          "scope": "global"
+        },
+        {
+          "name": "user",
+          "description": "Quản lý phê duyệt người dùng (Admin+)",
+          "usage": "!user <allow|disallow|list> <userID>",
+          "example": "!user allow 1000123456789",
+          "aliases": ["approve", "uia"],
+          "minRole": 2,
+          "scope": "global"
+        },
+        {
+          "name": "mod",
+          "description": "Quản lý Moderator theo từng box đã duyệt",
+          "usage": "!mod <add|rm|list> [userID|@tag]",
+          "example": "!mod add 1000123456789",
+          "minRole": 1,
+          "scope": "per-box",
+          "notes": "Admin/Owner có thể cấp ở mọi box; Moderator chỉ cấp trong box hiện tại"
+        },
+        {
+          "name": "ban",
+          "description": "Cấm người dùng (Moderator+)",
+          "usage": "!ban <userID> [reason]",
+          "example": "!ban 1000123456789 Spam",
+          "minRole": 1,
+          "scope": "global"
+        },
+        {
+          "name": "unban",
+          "description": "Bỏ cấm người dùng (Moderator+)",
+          "usage": "!unban <userID>",
+          "example": "!unban 1000123456789",
+          "minRole": 1,
+          "scope": "global"
+        },
+        {
+          "name": "kick",
+          "description": "Đuổi người dùng khỏi nhóm (Moderator+, bot cần quyền admin trong box)",
+          "usage": "!kick @tag | !kick <userID> [reason]",
+          "example": "!kick @TeenNgu | !kick 1000123456789 Vi phạm nội quy",
+          "minRole": 1,
+          "scope": "per-box"
+        },
+        {
+          "name": "reload",
+          "description": "Tải lại cấu hình/phân quyền",
+          "usage": "!reload",
+          "example": "!reload",
+          "minRole": 2,
+          "scope": "global"
+        },
+        {
+          "name": "reloadperms",
+          "description": "Tải lại cấu hình phân quyền",
+          "usage": "!reloadperms",
+          "example": "!reloadperms",
+          "minRole": 3,
+          "scope": "global"
+        },
+        {
+          "name": "adminstats",
+          "description": "Thống kê phân quyền (Admin+)",
+          "usage": "!adminstats",
+          "example": "!adminstats",
+          "minRole": 2,
+          "scope": "global"
+        },
+        {
+          "name": "restart",
+          "description": "Khởi động lại bot (Owner)",
+          "usage": "!restart",
+          "example": "!restart",
+          "minRole": 3,
+          "scope": "global"
+        },
+        {
+          "name": "shutdown",
+          "description": "Tắt bot (Owner)",
+          "usage": "!shutdown",
+          "example": "!shutdown",
+          "minRole": 3,
+          "scope": "global"
+        }
+      ]
+    }
+  },
+  "menu": {
+    "title": "🎯 CONVOX BOT MENU",
+    "subtitle": "Chọn category để xem các lệnh:",
+    "footer": "Reply số thứ tự để xem chi tiết !"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "plugins": {
+    "enabled": true,
+    "autoLoad": true,
+    "hotReload": true,
+    "pluginDir": "./plugins",
+    "defaultPlugins": [
+      "menu",
+      "info",
+      "ping",
+      "trans",
+      "admin",
+      "autodown",
+      "assistant_ngoc",
+      "weather",
+  "phatnguoi",
+  "voicenight"
+    ],
+    "pluginConfig": {
+      "trans": {
+        "enabled": true,
+        "defaultTarget": "vi"
+      },
+      "menu": {
+        "enabled": true,
+        "autoShow": true,
+        "showOnStart": true
+      },
+      "info": {
+        "enabled": true,
+        "showVersion": true,
+        "showUptime": true
+      },
+      "ping": {
+        "enabled": true,
+        "showLatency": true
+      },
+      "autodown": {
+        "enabled": true,
+        "autoEnable": true,
+        "supportedPlatforms": [
+          "facebook.com",
+          "tiktok.com",
+          "vt.tiktok.com",
+          "v.douyin.com",
+          "instagram.com",
+          "youtube.com",
+          "youtu.be"
+        ]
+      },
+      "assistant_ngoc": {
+        "enabled": true,
+        "model": "gemini-2.0-flash-exp",
+        "triggerWords": [
+          "ngọc"
+        ],
+        "replyToBotMessages": true,
+        "maxResponseLength": 30,
+        "cooldownMs": 2000
+      },
+      "systemadmin": {
+        "enabled": false
+      },
+      "weather": {
+        "enabled": true,
+        "language": "vi",
+        "defaultLocation": ""
+      },
+      "phatnguoi": {
+        "enabled": true,
+        "cooldown": 8,
+        "providers": [],
+        "providerTimeoutMs": 10000,
+        "includeOfficialLinks": true,
+        "compactOutput": true
+      },
+      "voicenight": {
+        "enabled": true
+      }
+    }
+  }
+}

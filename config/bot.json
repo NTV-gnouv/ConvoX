@@ -1,0 +1,36 @@
+{
+  "bot": {
+    "name": "ConvoX",
+    "version": "1.0.0",
+    "prefix": "!",
+    "admin": [],
+    "autoReply": true,
+    "autoMarkRead": true,
+    "logLevel": "info"
+  },
+  "facebook": {
+    "cookies": "./auth/cookies.json",
+    "fbstate": "./auth/fbstate.json",
+    "listenEvents": true,
+    "listenTyping": true,
+    "selfListen": false,
+    "forceLogin": true,
+    "logLevel": "silent"
+  },
+  "features": {
+    "menu": true,
+    "plugins": true,
+    "commands": true,
+    "autoReply": true,
+    "autoRestart": true
+  },
+  "logging": {
+    "level": "info",
+    "enableColors": true,
+    "enableFileLogging": false,
+    "logFile": "./logs/bot.log",
+    "maxFileSize": 10485760,
+  "maxFiles": 5,
+  "compact": true
+  }
+}
