@@ -383,6 +383,14 @@ class BotManager {
                     return; // AutoDown handled the message, no need to process further
                 }
             }
+            // LearnEng passive handler (to capture TTL replies without prefix)
+            const learnEngPlugin = this.pluginManager.getPlugin('learneng');
+            if (learnEngPlugin && typeof learnEngPlugin.handleMessage === 'function') {
+                const handled = await learnEngPlugin.handleMessage(event);
+                if (handled) {
+                    return;
+                }
+            }
             // Handle numeric reply without prefix: category open or command detail within a category
             const selection = (body || '').trim();
             if (/^\d+$/.test(selection)) {

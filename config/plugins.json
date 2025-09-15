@@ -11,7 +11,8 @@
       "trans",
       "admin",
       "autodown",
-      "assistant_ngoc",
+    "assistant_ngoc",
+    "learneng",
       "weather",
   "phatnguoi",
   "voicenight"
@@ -57,6 +58,9 @@
         "replyToBotMessages": true,
         "maxResponseLength": 30,
         "cooldownMs": 2000
+      },
+      "learneng": {
+        "enabled": true
       },
       "systemadmin": {
         "enabled": false

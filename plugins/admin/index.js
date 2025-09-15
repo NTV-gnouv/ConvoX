@@ -869,11 +869,47 @@ class AdminCommands {
      * Send message helper
      */
     async sendMessage(threadID, message) {
-        try {
-            return await this.api.sendMessage(message, threadID);
-        } catch (error) {
-            console.error('❌ Failed to send message:', error);
-            throw error;
+        const maxAttempts = parseInt(process.env.CONVOX_TRANSIENT_RETRY_LIMIT || '3', 10);
+        const baseDelay = 500; // ms
+        const safeMsg = typeof message === 'string' ? message : (message?.body || '[object]');
+        for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+            const start = Date.now();
+            try {
+                const res = await this.api.sendMessage(message, threadID);
+                if (this.logger?.debug) {
+                    this.logger.debug(`📤 Sent message to ${threadID} (len=${safeMsg.length}) in ${Date.now() - start}ms attempt ${attempt}/${maxAttempts}`);
+                }
+                return res;
+            } catch (error) {
+                const code = error?.error || error?.errorCode || error?.code;
+                const summary = error?.errorSummary || error?.message;
+                const transient = code === 1545012 || error?.transientError === 1;
+                const finalAttempt = attempt === maxAttempts;
+                // Structured log
+                const logLine = `sendMessage fail code=${code} summary="${summary}" thread=${threadID} attempt=${attempt}/${maxAttempts} transient=${transient}`;
+                if (this.logger?.warn) this.logger.warn(logLine); else console.warn('⚠️', logLine);
+                if (!transient || finalAttempt) {
+                    if (finalAttempt) {
+                        const errDetail = {
+                            code,
+                            summary,
+                            threadID,
+                            attempt,
+                            length: safeMsg.length,
+                            snippet: safeMsg.slice(0, 120)
+                        };
+                        if (this.logger?.logError) this.logger.logError(error, 'Final sendMessage failure'); else console.error('❌ Final sendMessage failure', errDetail, error);
+                    }
+                    if (!transient) throw error; // non-transient: abort immediately
+                }
+                // Backoff for transient
+                if (!finalAttempt) {
+                    const delay = baseDelay * Math.pow(2, attempt - 1) + Math.floor(Math.random() * 200);
+                    await new Promise(r => setTimeout(r, delay));
+                    continue;
+                }
+                throw error; // exhausted
+            }
         }
     }
 
